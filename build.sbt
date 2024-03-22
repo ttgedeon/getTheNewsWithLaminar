@@ -3,6 +3,7 @@ import org.scalajs.linker.interface.ModuleSplitStyle
 lazy val getTheNewsWithLaminar = project
   .in(file("."))
   .enablePlugins(ScalaJSPlugin) // Enable the Scala.js plugin in this project
+  .enablePlugins(ScalablyTypedConverterExternalNpmPlugin)
   .settings(
     scalaVersion := "3.2.2",
     // Tell Scala.js that this is an application with a main method
@@ -26,4 +27,6 @@ lazy val getTheNewsWithLaminar = project
     libraryDependencies += "org.scala-js" %%% "scalajs-dom" % "2.4.0",
     // Depend on Laminar
     libraryDependencies += "com.raquo" %%% "laminar" % "15.0.1",
+    // Tell ScalablyTyped that we manage `npm install` ourselves
+    externalNpm := baseDirectory.value,
   )
