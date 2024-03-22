@@ -3,7 +3,8 @@ package getTheNewsWithLaminar
 import com.raquo.laminar.api.L.{*, given}
 import scala.scalajs.js
 import scala.scalajs.js.annotation.*
-
+import typings.dotenv.mod
+import typings.dotenv.mod.configDotenv
 import org.scalajs.dom
 
 // import javascriptLogo from "/javascript.svg"
@@ -21,7 +22,15 @@ def GetTheNews(): Unit =
 end GetTheNews
 
 object Main:
+
   def appElement(): Element =
+    import scala.scalajs.js as Js
+    import scala.scalajs.js.UndefOr
+
+//    val f = Js.Dynamic.global.process.env.HOME.asInstanceOf[Js.UndefOr[String]]
+
     div(
-      h1("The news")
+      h1(s"The  news"),
+      p("===================================="),
+//      h2(f.getOrElse("XXX"))
     )
