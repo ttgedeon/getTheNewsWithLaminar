@@ -13,6 +13,9 @@ val javascriptLogo: String = js.native
 
 @main
 def GetTheNews(): Unit =
+  import scala.scalajs.js as Js
+  import scala.scalajs.js.UndefOr
+  val f = Js.Dynamic.global.process.env.NODE_ENV.asInstanceOf[Js.UndefOr[String]]
   windowEvents(_.onLoad).foreach { _ =>
     val appContainer: dom.Element = dom.document.getElementById(elementId = "app")
     val appElement: Element = Main.appElement()
@@ -24,19 +27,20 @@ end GetTheNews
 object Main:
 
   def appElement(): Element =
-    import scala.scalajs.js as Js
-    import scala.scalajs.js.UndefOr
     import Components.*
-//    val f = Js.Dynamic.global.process.env.HOME.asInstanceOf[Js.UndefOr[String]]
 
     div(
-      h1(s"The  news"),
+      secondaryNavBar(None, None, None, None, None, None, None, None),
       p("===================================="),
       passwordControlInput,
       p("===================================="),
       infoButton,
       p("===================================="),
-      mainCard,
+      primaryCard,
       p("====================================="),
-      mainNavBar
+      mainNavBar,
+      p("====================================="),
+      p("====================================="),
+      formCheckBox(None, None),
+      p("====================================="),
     )
