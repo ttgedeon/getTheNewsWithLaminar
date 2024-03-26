@@ -37,8 +37,6 @@ lazy val getTheNewsWithLaminar = project
       "io.circe" %%% "circe-parser",
       "io.circe" %%% "circe-generic"
     ).map(_.%(revision = circeVersion)),
-    // Depend on Laminext
-    libraryDependencies += "io.laminext" %%% "fetch" % "0.16.2",
     libraryDependencies += "org.http4s" %%% "http4s-dom" % "0.2.11",
     libraryDependencies += "org.http4s" %%% "http4s-circe" % "0.23.25",
     libraryDependencies += "io.circe" %%% "circe-literal" % "0.14.6",
