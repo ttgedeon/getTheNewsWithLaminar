@@ -22,9 +22,24 @@ object Components:
     labelContent = "Password"
   )
 
+  val simpleControlInput: Element = formControlInput(
+    divClass = "form-floating",
+    inputType = "text",
+    inputClass = "form-control",
+    inputId = "repo",
+    inputPlaceholder = "Comment id",
+    forLabel = "Comment id",
+    labelContent = "idComment"
+  )
+
   val infoButton: Element = buttonInfo(
     buttonType = "button", buttonClass = "btn btn-info",
     buttonContent = "Info"
+  )
+
+  val infoButtonX: Element = buttonInfoX(
+    buttonType = "button", buttonClass = "btn btn-info",
+    buttonContent = "InfoXXX"
   )
 
   val primaryCard: Element =

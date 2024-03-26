@@ -3,8 +3,6 @@ package getTheNewsWithLaminar
 import com.raquo.laminar.api.L.{*, given}
 import scala.scalajs.js
 import scala.scalajs.js.annotation.*
-import typings.dotenv.mod
-import typings.dotenv.mod.configDotenv
 import org.scalajs.dom
 
 // import javascriptLogo from "/javascript.svg"
@@ -31,15 +29,18 @@ object Main:
 
     div(
       secondaryNavBar(None, None, None, None, None, None, None, None),
-      p("===================================="),
       passwordControlInput,
+      p("***********************************"),
+      infoButtonX,
       p("===================================="),
       infoButton,
       p("===================================="),
+      simpleControlInput,
+      p("===================================="),
+      h3("We are the world"),
+      p(child.text <-- Var("jfjfjfjru").signal, idAttr := "comments"),
+      p("===================================="),
       primaryCard,
-      p("====================================="),
-      mainNavBar,
-      p("====================================="),
       p("====================================="),
       formCheckBox(None, None),
       p("====================================="),

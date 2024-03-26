@@ -12,8 +12,9 @@ import com.raquo.laminar.defs.complex.ComplexHtmlKeys.CompositeHtmlAttr
 import com.raquo.laminar.keys.{CompositeKey, HtmlAttr}
 import com.raquo.laminar.nodes.ReactiveHtmlElement.Base
 
-
 import org.scalajs.dom
+
+import org.scalajs.dom.MouseEvent
 
 
 object ComponentsFactory:
@@ -30,10 +31,18 @@ object ComponentsFactory:
       label(labelAttr := forLabel, child.text <-- Var(labelContent).signal)
     )
 
+  def buttonInfoX(buttonType: String, buttonClass: String, buttonContent: String)
+  : Element =
+    button(
+      `type` := buttonType, className := buttonClass, onClick --> {(_: MouseEvent) => XMain.manga()},
+      child.text <-- Var(buttonContent).signal, idAttr := "buttonx"
+    )
+
   def buttonInfo(buttonType: String, buttonClass: String, buttonContent: String): Element =
     button(
       `type` := buttonType, className := buttonClass,
-      child.text <-- Var(buttonContent).signal
+      onClick --> {(_: MouseEvent) => XMain.manga()},
+      child.text <-- Var(buttonContent).signal, idAttr := "button"
     )
 
   def customStringCompositeHtmlAttr(name: String, separator: String) : CompositeHtmlAttr = {
