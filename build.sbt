@@ -46,6 +46,7 @@ lazy val getTheNewsWithLaminar = project
     libraryDependencies += "com.softwaremill.sttp.client4" %%% "core" % "4.0.0-M1",
     libraryDependencies += "com.lihaoyi" %%% "upickle" % "3.2.0",
     libraryDependencies += "eu.timepit" %%% "refined" % "0.11.1",
+    libraryDependencies += "com.geirsson" %%% "metaconfig-core" % "0.12.0",
     // Tell ScalablyTyped that we manage `npm install` ourselves
     externalNpm := baseDirectory.value,
   )
