@@ -3,15 +3,15 @@ package getTheNewsWithLaminar.domain.apiDomain
 import getTheNewsWithLaminar.domain.apiDomain.Source
 
 /**
-  *
-  * @param source
-  * @param author
-  * @param title
-  * @param description
-  * @param url
-  * @param urlToImage
-  * @param publishedAt
-  * @param content
+  * A news article published
+  * @param source identifier of the source
+  * @param author author of the article
+  * @param title title of the article
+  * @param description description of the article
+  * @param url address of the article
+  * @param urlToImage article image address
+  * @param publishedAt article publication date
+  * @param content article content
   */
 case class Article(source: Source,
                    author: String,

@@ -2,7 +2,7 @@ package getTheNewsWithLaminar.domain.apiDomain
 
 import getTheNewsWithLaminar.domain.apiDomain.Enumerations.{
   Languages,
-  Popularity,
+  ArticleSortCriteria,
   SearchInFields
 }
 
@@ -39,6 +39,7 @@ case class NewsQuerySettings(keyword: Option[String],
                              from: Option[String],
                              to: Option[String],
                              language: Option[Languages],
-                             sortBy: Popularity = Popularity.PUBLISHED_AT,
+                             sortBy: ArticleSortCriteria =
+                               ArticleSortCriteria.PUBLISHED_AT,
                              pageSize: Int = 100,
                              page: Int = 1)

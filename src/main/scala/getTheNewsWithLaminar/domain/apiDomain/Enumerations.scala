@@ -10,24 +10,24 @@ object Enumerations:
    * to sort the articles returned by the new api
    * @param title Popularity tag
    */
-  enum Popularity(title: String):
-    case RELEVANCY extends Popularity(title = "relevancy")
-    case POPULARITY extends Popularity(title = "popularity")
-    case PUBLISHED_AT extends Popularity(title = "publishedAt")
+  enum ArticleSortCriteria(title: String):
+    case RELEVANCY extends ArticleSortCriteria(title = "relevancy")
+    case POPULARITY extends ArticleSortCriteria(title = "popularity")
+    case PUBLISHED_AT extends ArticleSortCriteria(title = "publishedAt")
 
-  object Popularity:
+  object ArticleSortCriteria:
     /**
      * Converts weighted Popularity actual value into an enumeration entry
      * @param title actual popularity value
      * @return Enumerations entry
      */
-    def fromTitles(title: String): Popularity =
+    def fromTitles(title: String): ArticleSortCriteria =
       title match
-        case "relevancy" => Popularity.RELEVANCY
-        case "popularity" => Popularity.POPULARITY
-        case "publishedAt" => Popularity.PUBLISHED_AT
+        case "relevancy" => ArticleSortCriteria.RELEVANCY
+        case "popularity" => ArticleSortCriteria.POPULARITY
+        case "publishedAt" => ArticleSortCriteria.PUBLISHED_AT
     end fromTitles
-  end Popularity
+  end ArticleSortCriteria
 
   /**
    * This enumeration contains the collection of the categories
