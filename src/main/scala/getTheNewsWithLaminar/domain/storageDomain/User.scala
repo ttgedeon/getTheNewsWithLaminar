@@ -1,2 +1,5 @@
 package getTheNewsWithLaminar.domain.storageDomain
-case class User()
+
+import java.util.UUID
+
+case class User(id: UUID, firstName: String, lastName: String, email: String)

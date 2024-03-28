@@ -3,6 +3,10 @@ package getTheNewsWithLaminar
 object XMain:
 
   case class Comments(id: String, text: String, postId: String)
+  case class Resources(id: String, title: String, description: String,
+                      resource_remote_id: String, program: String)
+  case class Domains(id: String, domain: String, is_primary: Boolean,
+                     created: String, modified: String, tenant: String)
 
   def manga(): Unit =
     import cats.effect.*

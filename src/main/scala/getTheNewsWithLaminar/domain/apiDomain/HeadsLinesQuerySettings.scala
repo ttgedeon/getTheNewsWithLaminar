@@ -1,4 +1,4 @@
-package getTheNewsWithLaminar.domain
+package getTheNewsWithLaminar.domain.apiDomain
 
 abstract class HeadsLinesQuerySettings(country: Option[String],
                                        category: Option[String],

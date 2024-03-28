@@ -1,6 +1,6 @@
-package getTheNewsWithLaminar.domain
+package getTheNewsWithLaminar.domain.apiDomain
 
-import DomainEnumerations.Popularity
+import getTheNewsWithLaminar.domain.apiDomain.Enumerations.Popularity
 
 case class NewsQuerySettings(keyword: Option[String],
                              searchIn: Option[String],

@@ -1,6 +1,6 @@
 package getTheNewsWithLaminar.domain.apiDomain
 
-object DomainEnumerations:
+object Enumerations:
   enum Popularity(title: String):
     case RELEVANCY extends Popularity(title = "relevancy")
     case POPULARITY extends Popularity(title = "popularity")
@@ -29,14 +29,4 @@ object DomainEnumerations:
   end ResponseStatus
 
 
-  enum ArticlesUsersTags(title: String):
-    case LIKED extends ArticlesUsersTags(title = "liked")
-    case SAVED extends ArticlesUsersTags(title = "saved")
-
-  object ArticlesUsersTags:
-    def fromTitles(title: String): ArticlesUsersTags =
-      title match
-        case "liked" => ArticlesUsersTags.LIKED
-        case "saved" => ArticlesUsersTags.SAVED
-
-end DomainEnumerations
+end Enumerations

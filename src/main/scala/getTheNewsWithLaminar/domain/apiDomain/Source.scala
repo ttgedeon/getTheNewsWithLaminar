@@ -1,4 +1,4 @@
-package getTheNewsWithLaminar.domain
+package getTheNewsWithLaminar.domain.apiDomain
 
 case class Source(id: String,
                   name: String,

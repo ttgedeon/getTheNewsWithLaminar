@@ -1,4 +1,6 @@
-package getTheNewsWithLaminar.domain
+package getTheNewsWithLaminar.domain.apiDomain
+
+import getTheNewsWithLaminar.domain.apiDomain.Source
 
 case class Article(source: Source,
                    author: String,
