@@ -16,7 +16,7 @@ object NewsDb:
   /**
    * The key is the user id, and the value is the encrypted password of the user
    */
-  val usersKeysDb: Map[String, String] = Map()
+  var usersKeysDb: Map[String, String] = Map()
 
   /**
    * collection of users
