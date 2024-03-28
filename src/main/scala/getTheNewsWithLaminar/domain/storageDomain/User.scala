@@ -7,4 +7,9 @@ package getTheNewsWithLaminar.domain.storageDomain
   * @param lastName User last nane
   * @param email User email
   */
-case class User(id: String, firstName: String, lastName: String, email: String)
+case class User(id: String,
+                firstName: String,
+                lastName: String,
+                email: String,
+                picture: Option[String],
+                isAuthenticated: Boolean = false)

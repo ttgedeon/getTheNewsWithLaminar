@@ -8,7 +8,7 @@ object Enumerations:
   /**
    * This enumeration contains the collection of tags used
    * to sort the articles returned by the new api
-   * @param title Popularity tag
+   * @param title ArticleSortCriteria tag
    */
   enum ArticleSortCriteria(title: String):
     case RELEVANCY extends ArticleSortCriteria(title = "relevancy")

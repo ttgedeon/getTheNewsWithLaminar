@@ -3,6 +3,7 @@ package getTheNewsWithLaminar.domain.storageDomain
 import getTheNewsWithLaminar.domain.apiDomain.Article
 import getTheNewsWithLaminar.domain.storageDomain.Enumerations.ArticlesUsersTags
 
+trait NewsDb
 /**
  * This object serves as a repository for any data to store
  */
