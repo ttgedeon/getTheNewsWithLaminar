@@ -1,5 +1,10 @@
 package getTheNewsWithLaminar.domain.apiDomain
 
+import upickle.default.ReadWriter.join
+import upickle.default.*
+import ujson.Value
+
+
 /**
  * This object contains the collection of enumerations used
  * in api modeling
@@ -41,19 +46,24 @@ object Enumerations:
      * @param title actual popularity value
      * @return Enumerations entry
      */
-    def fromTitles(title: String): ArticleSortCriteria =
+    def fromTitle(title: String): ArticleSortCriteria =
       title match
         case "relevancy" => ArticleSortCriteria.RELEVANCY
         case "popularity" => ArticleSortCriteria.POPULARITY
         case "publishedAt" => ArticleSortCriteria.PUBLISHED_AT
-    end fromTitles
+    end fromTitle
 
-    def toTitles(entry: ArticleSortCriteria): String =
+    /**
+     * Converts an `ArticleSortCriteria` entry into an actual value as a string
+     * @param entry `ArticleSortCriteria` value
+     * @return actual value as a string
+     */
+    def toTitle(entry: ArticleSortCriteria): String =
       entry match
         case ArticleSortCriteria.RELEVANCY => "relevancy"
         case ArticleSortCriteria.POPULARITY => "popularity"
         case ArticleSortCriteria.PUBLISHED_AT => "publishedAt"
-    end toTitles
+    end toTitle
 
   end ArticleSortCriteria
 
@@ -83,7 +93,7 @@ object Enumerations:
      * @param title category enumeration actual value
      * @return  Category enumeration entry
      */
-    def fromTitles(title: String): Category =
+    def fromTitle(title: String): Category =
       title match
         case "business" => Category.BUSINESS
         case "entertainment" => Category.ENTERTAINMENT
@@ -91,14 +101,14 @@ object Enumerations:
         case "science" => Category.SCIENCE
         case "sports" => Category.SPORTS
         case "technology" => Category.TECHNOLOGY
-    end fromTitles
+    end fromTitle
 
     /**
      * Converts a `Category` entry into an actual value in `String`
      * @param entry `Category` value
      * @return `String` value
      */
-    def toTitles(entry: Category): String =
+    def toTitle(entry: Category): String =
       entry match
         case Category.BUSINESS => "business"
         case Category.ENTERTAINMENT => "entertainment"
@@ -107,12 +117,12 @@ object Enumerations:
         case Category.SPORTS => "sports"
         case Category.TECHNOLOGY => "technology"
 
-
   /**
    * This enumeration contains a collection of all possible countries
    * to use in the API category.
    */
   enum Country(title: String)  extends QueryKey:
+
     case AE extends Country(title = "ae")
     case AR extends Country(title = "ar")
     case AT extends Country(title = "at")
@@ -181,7 +191,7 @@ object Enumerations:
      *
      * @param title country abbreviation actual value
      */
-    def fromTitles(title: String): Country =
+    def fromTitle(title: String): Country =
       title match
         case "ae" => Country.AE
         case "ar" => Country.AR
@@ -244,7 +254,7 @@ object Enumerations:
      * @param entry Country value
      * @return actual country value code in 2 characters
      */
-    def toTitles(entry: Country): String =
+    def toTitle(entry: Country): String =
       entry match
         case Country.AE => "ae"
         case Country.AR => "ar"
@@ -310,6 +320,13 @@ object Enumerations:
     case ERROR extends ResponseStatus(title = "error")
 
   object ResponseStatus:
+
+    given ReadWriter[ResponseStatus] = readwriter[ujson.Value]
+      .bimap[ResponseStatus](
+        (x: ResponseStatus) => ResponseStatus.toTitle(x),
+        (json: Value) => ResponseStatus.fromTitle(json.toString)
+      )
+
     /**
      * Converts weighted API response status enumeration actual value
      * into an enumeration entry
@@ -317,22 +334,22 @@ object Enumerations:
      * @param title response status enumeration actual value
      * @return ResponseStatus enumeration entry
      */
-    def fromTitles(title: String): ResponseStatus =
+    def fromTitle(title: String): ResponseStatus =
       title match
         case "ok" => ResponseStatus.OK
         case "error" => ResponseStatus.ERROR
-    end fromTitles
+    end fromTitle
 
     /**
      * Converts a `ResponseStatus` entry into an actual value as a string
      * @param entry `ResponseStatus` value
      * @return actual response status value as a string
      */
-    def toTitles(entry: ResponseStatus): String =
+    def toTitle(entry: ResponseStatus): String =
       entry match
         case ResponseStatus.OK => "ok"
         case ResponseStatus.ERROR => "error"
-    end toTitles
+    end toTitle
 
   end ResponseStatus
 
@@ -346,6 +363,13 @@ object Enumerations:
     case CONTENT extends SearchInFields(title = "content")
 
   object SearchInFields extends QueryParameter:
+
+    given ReadWriter[SearchInFields] = readwriter[ujson.Value]
+      .bimap[SearchInFields](
+        (x: SearchInFields) => SearchInFields.toTitle(x),
+        (json: Value) => SearchInFields.fromTitle(json.toString)
+      )
+
     override def queryParameter: String = "searchIn"
 
     /**
@@ -364,7 +388,7 @@ object Enumerations:
      * @param entry SearchInFields enum value
      * @return actual field name to serch in
      */
-    def toTitles(entry: SearchInFields): String =
+    def toTitle(entry: SearchInFields): String =
       entry match
         case SearchInFields.TITLE => "title"
         case SearchInFields.DESCRIPTION => "description"
@@ -392,6 +416,12 @@ object Enumerations:
 
   object Languages extends QueryParameter :
 
+    given ReadWriter[Languages] = readwriter[ujson.Value]
+      .bimap[Languages](
+        (x: Languages) => Languages.toTitle(x),
+        (json: Value) => Languages.fromTitle(json.toString)
+      )
+
     /**
      * Actual parameter key to use when specifying the language
      *  @return `String` value
@@ -403,7 +433,7 @@ object Enumerations:
      * @param title search in actual value
      * @return Languages enumeration entry
      */
-    def fromTitles(title: String): Languages =
+    def fromTitle(title: String): Languages =
       title match
         case "ar" => Languages.AR
         case "de" => Languages.DE
@@ -425,7 +455,7 @@ object Enumerations:
      * @param entry search in actual value
      * @return Languages enumeration entry
      */
-    def toTitles(entry: Languages): String =
+    def toTitle(entry: Languages): String =
       entry match
         case Languages.AR => "ar"
         case Languages.DE => "de"
@@ -451,6 +481,13 @@ object Enumerations:
     case Sources extends Api(title = "top-headlines/sources")
 
   object Api:
+
+    given ReadWriter[Api] = readwriter[ujson.Value]
+      .bimap[Api](
+        (x: Api) => Api.toTitle(x),
+        (json: Value) => Api.fromTitle(json.toString)
+      )
+
     /**
      * Converts a given endpoint into its enumeration entry
      * @param title actual endpoint entry

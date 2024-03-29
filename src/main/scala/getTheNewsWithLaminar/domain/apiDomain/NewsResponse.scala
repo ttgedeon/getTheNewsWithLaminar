@@ -1,5 +1,7 @@
 package getTheNewsWithLaminar.domain.apiDomain
 
+import upickle.default.*
+
 import Enumerations.ResponseStatus
 import getTheNewsWithLaminar.domain.apiDomain.Article
 import getTheNewsWithLaminar.domain.apiDomain.Enumerations.ResponseStatus
@@ -15,4 +17,4 @@ import getTheNewsWithLaminar.domain.apiDomain.Enumerations.ResponseStatus
   */
 case class NewsResponse(status: ResponseStatus,
                         totalResults: Int,
-                        articles: List[Article])
+                        articles: List[Article]) derives ReadWriter

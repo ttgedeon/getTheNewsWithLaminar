@@ -1,5 +1,7 @@
 package getTheNewsWithLaminar.domain.apiDomain
 
+import upickle.default.*
+
 /**
   * This class models the new publishers that top headlines
   * @param id The identifier of the news source. You can use this with our other endpoints.
@@ -16,4 +18,4 @@ case class Source(id: String,
                   url: String,
                   category: String,
                   language: String,
-                  country: String)
+                  country: String) derives ReadWriter

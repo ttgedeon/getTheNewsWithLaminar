@@ -1,5 +1,7 @@
 package getTheNewsWithLaminar.domain.apiDomain
 
+import upickle.default.*
+
 import getTheNewsWithLaminar.domain.apiDomain.Source
 
 /**
@@ -13,11 +15,11 @@ import getTheNewsWithLaminar.domain.apiDomain.Source
   * @param publishedAt article publication date
   * @param content article content
   */
-case class Article(source: Source,
+case class Article(source: LightSource,
                    author: String,
                    title: String,
                    description: String,
                    url: String,
                    urlToImage: String,
                    publishedAt: String,
-                   content: String)
+                   content: String) derives ReadWriter
