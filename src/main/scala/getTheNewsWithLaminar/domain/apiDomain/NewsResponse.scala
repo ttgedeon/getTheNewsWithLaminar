@@ -2,6 +2,7 @@ package getTheNewsWithLaminar.domain.apiDomain
 
 import Enumerations.ResponseStatus
 import getTheNewsWithLaminar.domain.apiDomain.Article
+import getTheNewsWithLaminar.domain.apiDomain.Enumerations.ResponseStatus
 
 /**
   * News api response object model
@@ -12,6 +13,6 @@ import getTheNewsWithLaminar.domain.apiDomain.Article
   *                     the page parameter in your requests to page through them
   * @param articles The results of the request.
   */
-case class NewsResponses(status: ResponseStatus,
-                         totalResults: Int,
-                         articles: List[Article])
+case class NewsResponse(status: ResponseStatus,
+                        totalResults: Int,
+                        articles: List[Article])

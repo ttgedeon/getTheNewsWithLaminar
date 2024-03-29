@@ -3,6 +3,10 @@ package getTheNewsWithLaminar.repository
 import getTheNewsWithLaminar.domain.storageDomain.User
 import getTheNewsWithLaminar.domain.storageDomain.NewsDb
 
+/**
+ * User repository responsible for all CRUD operations
+ * related to the User 
+ */
 object UserRepository extends Repository[User]:
 
   /**
@@ -58,7 +62,9 @@ object UserRepository extends Repository[User]:
 
     val userSet: Set[User] = db.usersDb.filter((_: User).id == id)
     if  userSet.nonEmpty then
-      val _: Set[User] = db.usersDb.removedAll(userSet)
+      val userRemoved: Set[User] = db.usersDb.removedAll(userSet)
+      // todo Remove all the users related data before removing the user itself
+      db.usersDb = userRemoved
       true
     else
       RepositoryError("User not found")
