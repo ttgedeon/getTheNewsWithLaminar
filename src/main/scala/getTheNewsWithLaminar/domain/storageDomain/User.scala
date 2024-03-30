@@ -1,5 +1,7 @@
 package getTheNewsWithLaminar.domain.storageDomain
 
+import upickle.default.*
+
 /**
   * The User model
   * @param id User id(uuid)
@@ -12,4 +14,4 @@ case class User(id: String,
                 lastName: String,
                 email: String,
                 picture: Option[String],
-                isAuthenticated: Boolean = false)
+                isAuthenticated: Boolean = false) derives ReadWriter

@@ -15,6 +15,6 @@ import getTheNewsWithLaminar.domain.apiDomain.Enumerations.ResponseStatus
   *                     the page parameter in your requests to page through them
   * @param articles The results of the request.
   */
-case class NewsResponse(status: ResponseStatus,
+case class NewsResponse(status: String,
                         totalResults: Int,
                         articles: List[Article]) derives ReadWriter

@@ -1,105 +1,100 @@
 package getTheNewsWithLaminar.repository
 
 import getTheNewsWithLaminar.domain.storageDomain.User
-import getTheNewsWithLaminar.domain.storageDomain.NewsDb
+import sttp.client4.quick.*
+import sttp.client4.Response
+import upickle.default.*
+import scala.concurrent.Future
+import scala.concurrent.ExecutionContext.Implicits.global
 
-/**
- * User repository responsible for all CRUD operations
- * related to the User 
- */
 object UserRepository extends Repository[User]:
 
   /**
-   * data store
+   * main endpoint for the user repository
    */
-  override val db: NewsDb.type = NewsDb
+  override val mainEndpoint: String = "http://localhost:3000/users"
 
   /**
-   * Get a user using it's identifier
-   * @param id user identifier
+   * Retrieve an instance of entity
+   * @param id identifier of the entity to retrieve
    * @return RepositoryError | User
    */
-  override def getById(id: String): RepositoryError | User =
-
-    val s: Set[User] = db.usersDb.filter((_: User).id == id)
-    if s.isEmpty then RepositoryError("No such user in the database")
-    else s.head
+  override def getById(id: String): Future[RepositoryError | User] =
+    requestInit
+      .get(uri"$mainEndpoint/$id")
+      .header("Content-Type", "application/json")
+      .send()
+      .flatMap { (response: Response[String]) =>
+        if response.code.toString.charAt(0) == 4 then
+          Future.failed[RepositoryError](RepositoryError("No such element found"))
+        else Future.successful[User](read[User](response.body))
+      }
 
   /**
-   * Create a new user
-   * @param value user object to save
+   * Retrieve all the instances of entity User
+   * @return `Future[RepositoryError, Seq[User]]`
+   */
+  override def getAll: Future[RepositoryError | Seq[User]] =
+    requestInit
+      .get(uri"$mainEndpoint")
+      .header("Content-Type", "application/json")
+      .send()
+      .flatMap { (response: Response[String]) =>
+        if response.code.toString.charAt(0) == 4 then
+          Future.failed[RepositoryError](RepositoryError("Not able to get all"))
+        else Future.successful[List[User]](read[List[User]](response.body))
+      }
+
+
+  /**
+   * Tries to save an instance of User
+   * @param value instance of User to save
    * @return RepositoryError | User
    */
-  override def save(value: User): RepositoryError | User =
-
-    val userSaved: Boolean = db.usersDb(value.copy(isAuthenticated = true))
-    if userSaved then db.usersDb.filter((_: User).id == value.id).head
-    else RepositoryError("Not able to store the user")
+  override def save(value: User): Future[RepositoryError | User] =
+    requestInit
+      .post(uri"$mainEndpoint")
+      .header("Content-Type", "application/json")
+      .body(write(value))
+      .send()
+      .flatMap { (response: Response[String]) =>
+        if response.code.toString.charAt(0) == 4 then
+          Future.failed[RepositoryError](
+            RepositoryError("Not able to create such element"))
+        else Future.successful[User](read[User](response.body))
+      }
 
   /**
-   * Update a user with the new attributes values, having kept the identifier
-   * of the user
-   * @param value user object to update
+   * Updates an instance of User if its identifier has been saved
+   * @param value instance of User to update
    * @return RepositoryError | User
    */
-  override def update(value: User): RepositoryError | User =
-
-    val userSet: Set[User] = db.usersDb.filter((_: User).id == value.id)
-    if  userSet.nonEmpty then
-      val _: Set[User] = db.usersDb.removedAll(userSet)
-      db.usersDb(value)
-      value
-    else
-      RepositoryError("The update operation was unsuccessfully performed")
-
-
-  /**
-   * Delete an object from the database
-   * @param id identifier of the user to update
-   * @return RepositoryError | true
-   */
-  override def delete(id: String): RepositoryError | true =
-
-    val userSet: Set[User] = db.usersDb.filter((_: User).id == id)
-    if  userSet.nonEmpty then
-      val userRemoved: Set[User] = db.usersDb.removedAll(userSet)
-      // todo Remove all the users related data before removing the user itself
-      db.usersDb = userRemoved
-      true
-    else
-      RepositoryError("User not found")
+  override def update(value: User): Future[RepositoryError | User] =
+    requestInit
+      .patch(uri"$mainEndpoint/${value.id}")
+      .header("Content-Type", "application/json")
+      .body(write(value))
+      .send()
+      .flatMap { (response: Response[String]) =>
+        if response.code.toString.charAt(0) == 4 then
+          Future.failed[RepositoryError](
+            RepositoryError("Not able to update such element"))
+        else Future.successful[User](read[User](response.body))
+      }
 
   /**
-   * Update a given user password
-   * @param userId  User identifier
-   * @param newPassword new user password
-   * @param oldPassword old user password
-   * @return RepositoryError | true
+   * Tries to delete an instance of User if it is effectively in the
+   * store
+   * @param id identifier of the instance to delete
+   * @return RepositoryError | User
    */
-  def updateUserPassword(userId: String, newPassword: String, oldPassword: String)
-    : RepositoryError | true =
-
-      val userKeys: Map[String, String] =
-        db.usersKeysDb.filter((k: (String, String)) => k._1 == userId & k._2 == oldPassword)
-
-      if userKeys.nonEmpty then
-        db.usersKeysDb = db.usersKeysDb.updated(userId, newPassword)
-        true
-      else RepositoryError("Unable to update the password")
-
-  /**
-   * Create a user password
-   * @param userId User identifier
-   * @param password User password
-   * @return RepositoryError | true
-   */
-  def setUserPassword(userId: String, password: String) : RepositoryError | true =
-
-      val userKeys: Map[String, String] =
-        db.usersKeysDb.filter((k: (String, String)) => k._1 == userId & k._2 == password)
-
-      if userKeys.nonEmpty then
-        RepositoryError("This user already has an credentials saved")
-      else
-        db.usersKeysDb = db.usersKeysDb.updated(userId, password)
-        true
+  override def delete(id: String): Future[RepositoryError | User] =
+    requestInit
+      .delete(uri"$mainEndpoint/$id")
+      .header("Content-Type", "application/json")
+      .send()
+      .flatMap { (response: Response[String]) =>
+        if response.code.toString.charAt(0) == 4 then
+          Future.failed[RepositoryError](RepositoryError("Not able to delete such element"))
+        else Future.successful[User](read[User](response.body))
+      }
