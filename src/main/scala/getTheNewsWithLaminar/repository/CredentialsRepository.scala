@@ -7,6 +7,9 @@ import upickle.default.*
 import scala.concurrent.Future
 import scala.concurrent.ExecutionContext.Implicits.global
 
+/**
+ * Repository instance for the `Credentials`
+ */
 object CredentialsRepository extends Repository[Credentials]:
 
   /**
@@ -17,7 +20,7 @@ object CredentialsRepository extends Repository[Credentials]:
   /**
    * Retrieve an instance of entity
    * @param id identifier of the entity to retrieve
-   * @return RepositoryError | Credentials
+   * @return `Future[RepositoryError | Credentials]`
    */
   override def getById(id: String): Future[RepositoryError | Credentials] =
     requestInit
@@ -49,7 +52,7 @@ object CredentialsRepository extends Repository[Credentials]:
   /**
    * Tries to save an instance of Credentials
    * @param value instance of Credentials to save
-   * @return RepositoryError | Credentials
+   * @return `Future[RepositoryError | Credentials]`
    */
   override def save(value: Credentials): Future[RepositoryError | Credentials] =
     requestInit
@@ -67,7 +70,7 @@ object CredentialsRepository extends Repository[Credentials]:
   /**
    * Updates an instance of Credentials if its identifier has been saved
    * @param value instance of Credentials to update
-   * @return RepositoryError | Credentials
+   * @return `Future[RepositoryError | Credentials]`
    */
   override def update(value: Credentials): Future[RepositoryError | Credentials] =
     requestInit
@@ -86,7 +89,7 @@ object CredentialsRepository extends Repository[Credentials]:
    * Tries to delete an instance of Credentials if it is effectively in the
    * store
    * @param id identifier of the instance to delete
-   * @return RepositoryError | Credentials
+   * @return `Future[RepositoryError | Credentials]`
    */
   override def delete(id: String): Future[RepositoryError | Credentials] =
     requestInit
@@ -98,4 +101,3 @@ object CredentialsRepository extends Repository[Credentials]:
           Future.failed[RepositoryError](RepositoryError("Not able to delete such element"))
         else Future.successful[Credentials](read[Credentials](response.body))
       }
-
