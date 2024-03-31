@@ -1,20 +1,18 @@
-package getTheNewsWithLaminar
+package getTheNewsWithLaminar.components
 
 import com.raquo.laminar.api.L.{*, given}
-import scala.scalajs.js
-import scala.scalajs.js.annotation.*
 import com.raquo.laminar.modifiers.Modifier
 import com.raquo.laminar.nodes.ReactiveHtmlElement
-
 import com.raquo.laminar.DomApi
 import com.raquo.laminar.codecs.StringAsIsCodec
 import com.raquo.laminar.defs.complex.ComplexHtmlKeys.CompositeHtmlAttr
 import com.raquo.laminar.keys.{CompositeKey, HtmlAttr}
 import com.raquo.laminar.nodes.ReactiveHtmlElement.Base
-
 import org.scalajs.dom
-
 import org.scalajs.dom.MouseEvent
+
+import scala.scalajs.js
+import scala.scalajs.js.annotation.*
 
 
 object ComponentsFactory:
@@ -28,20 +26,21 @@ object ComponentsFactory:
         `type` := inputType, className := inputClass, idAttr := inputId,
         placeholder := inputPlaceholder
       ),
-      label(labelAttr := forLabel, child.text <-- Var(labelContent).signal)
+      label(labelAttr := forLabel, labelContent)
     )
 
   def buttonInfoX(buttonType: String, buttonClass: String, buttonContent: String)
   : Element =
     button(
-      `type` := buttonType, className := buttonClass, onClick --> {(_: MouseEvent) => XMain.manga()},
+      `type` := buttonType, className := buttonClass, onClick --> {(_: MouseEvent) => import getTheNewsWithLaminar.XMain
+        XMain.manga()},
       child.text <-- Var(buttonContent).signal, idAttr := "buttonx"
     )
 
   def buttonInfo(buttonType: String, buttonClass: String, buttonContent: String): Element =
     button(
       `type` := buttonType, className := buttonClass,
-      onClick --> {(_: MouseEvent) => XMain.manga()},
+      onClick --> {(_: MouseEvent) => ()},
       child.text <-- Var(buttonContent).signal, idAttr := "button"
     )
 

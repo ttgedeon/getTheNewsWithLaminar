@@ -28,7 +28,7 @@ object CredentialsRepository extends Repository[Credentials]:
       .header("Content-Type", "application/json")
       .send()
       .flatMap { (response: Response[String]) =>
-        if response.code.toString.charAt(0) == 4 then
+        if response.code.toString.charAt(0) != 2 then
           Future.failed[RepositoryError](RepositoryError("No such element found"))
         else Future.successful[Credentials](read[Credentials](response.body))
       }
@@ -43,11 +43,10 @@ object CredentialsRepository extends Repository[Credentials]:
       .header("Content-Type", "application/json")
       .send()
       .flatMap { (response: Response[String]) =>
-        if response.code.toString.charAt(0) == 4 then
+        if response.code.toString.charAt(0) != 2 then
           Future.failed[RepositoryError](RepositoryError("Not able to get all"))
         else Future.successful[List[Credentials]](read[List[Credentials]](response.body))
       }
-
 
   /**
    * Tries to save an instance of Credentials
@@ -61,7 +60,7 @@ object CredentialsRepository extends Repository[Credentials]:
       .body(write(value))
       .send()
       .flatMap { (response: Response[String]) =>
-        if response.code.toString.charAt(0) == 4 then
+        if response.code.toString.charAt(0) != 2 then
           Future.failed[RepositoryError](
             RepositoryError("Not able to create such element"))
         else Future.successful[Credentials](read[Credentials](response.body))
@@ -79,7 +78,7 @@ object CredentialsRepository extends Repository[Credentials]:
       .body(write(value))
       .send()
       .flatMap { (response: Response[String]) =>
-        if response.code.toString.charAt(0) == 4 then
+        if response.code.toString.charAt(0) != 2 then
           Future.failed[RepositoryError](
             RepositoryError("Not able to update such element"))
         else Future.successful[Credentials](read[Credentials](response.body))
@@ -97,7 +96,7 @@ object CredentialsRepository extends Repository[Credentials]:
       .header("Content-Type", "application/json")
       .send()
       .flatMap { (response: Response[String]) =>
-        if response.code.toString.charAt(0) == 4 then
+        if response.code.toString.charAt(0) != 2 then
           Future.failed[RepositoryError](RepositoryError("Not able to delete such element"))
         else Future.successful[Credentials](read[Credentials](response.body))
       }

@@ -47,6 +47,8 @@ lazy val getTheNewsWithLaminar = project
     libraryDependencies += "com.lihaoyi" %%% "upickle" % "3.2.0",
     libraryDependencies += "eu.timepit" %%% "refined" % "0.11.1",
     libraryDependencies += "com.geirsson" %%% "metaconfig-core" % "0.12.0",
+    libraryDependencies += "com.geirsson" %% "metaconfig-typesafe-config" % "0.12.0",
+    libraryDependencies += "io.frontroute" %%% "frontroute" % "0.18.2",
     // Tell ScalablyTyped that we manage `npm install` ourselves
     externalNpm := baseDirectory.value,
   )

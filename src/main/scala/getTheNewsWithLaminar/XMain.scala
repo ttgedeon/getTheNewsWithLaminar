@@ -2,7 +2,6 @@ package getTheNewsWithLaminar
 
 object XMain:
   import upickle.default.*
-
   case class Comments(id: String, text: String, postId: String) derives ReadWriter
   case class Resources(id: String, title: String, description: String,
                       resource_remote_id: String, program: String)
