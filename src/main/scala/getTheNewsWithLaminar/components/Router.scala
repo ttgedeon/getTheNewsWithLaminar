@@ -1,5 +1,7 @@
 package getTheNewsWithLaminar.components
 
+import getTheNewsWithLaminar.pages.*
+
 import com.raquo.laminar.api.L.{*, given}
 import org.scalajs.dom
 import frontroute.*
@@ -10,11 +12,23 @@ object Router:
       routes(
         div(
           cls := "container-fluid",
-          pathEnd {
-           div(NavBar.apply())
+          (pathEnd | path("home")) {
+           div(
+             NavBar.apply(),
+             HomePage()
+           )
           },
-          path("home") {
-            div("The home page")
+          path("login") {
+            LoginPage()
+          },
+          path("signup") {
+            SignupPage()
+          },
+          path("changePassword") {
+            ChangePasswordPage()
+          },
+          noneMatched {
+            NotFoundPage()
           }
         )
       )
