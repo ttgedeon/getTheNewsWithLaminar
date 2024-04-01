@@ -14,7 +14,7 @@ object Router:
           cls := "container-fluid",
           (pathEnd | path("home")) {
            div(
-             NavBar.apply(),
+             NavBar(),
              HomePage()
            )
           },
@@ -26,6 +26,9 @@ object Router:
           },
           path("changePassword") {
             ChangePasswordPage()
+          },
+          path("resetPassword") {
+            ResetPassword()
           },
           noneMatched {
             NotFoundPage()

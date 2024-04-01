@@ -12,22 +12,25 @@ object NavBar:
           dataBsToggle := "collapse", dataBsTarget := "#navbarTogglerDemo03",
           ariaControls := "navbarTogglerDemo03", ariaExpanded := "false",
           ariaLabel := "Toggle navigation",
-          child <-- Var(span(className := "navbar-toggler-icon")).signal
+          span(className := "navbar-toggler-icon")
         ),
         a(className := "navbar-brand", href := "#", child.text <-- Var("Navbar").signal),
         div(className := "collapse navbar-collapse", idAttr := "navbarTogglerDemo03",
           ul(className := "navbar-nav me-auto mb-2 mb-lg-0",
             li(className := "nav-item",
               a(className := "nav-link active", ariaCurrent := "page",
-                href := "#", child.text <-- Var("Home").signal)
+                "Home"
+              )
             ),
             li(className := "nav-item",
               a(className := "nav-link disabled", href := "#", ariaDisabled := "true",
-                child.text <-- Var("Link").signal)
+               "Link"
+              )
             ),
             li(className := "nav-item",
               a(className := "nav-link disabled", ariaDisabled := "true",
-                child.text <-- Var("Disabled").signal)
+                "Disabled"
+              )
             )
           ),
           form(className := "d-flex", role := "search",
@@ -35,7 +38,8 @@ object NavBar:
               placeholder := "Search", ariaLabel := "Search"
             ),
             button(className := "btn btn-outline-success", `type` := "submit",
-              child.text <-- Var("Search").signal)
+            "Search"
+            )
           )
         )
       )

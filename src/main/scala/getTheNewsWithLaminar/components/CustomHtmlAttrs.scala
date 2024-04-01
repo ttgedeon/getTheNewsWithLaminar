@@ -44,3 +44,6 @@ object CustomHtmlAttrs:
 
   val ariaLabelledBy: CompositeHtmlAttr =
     customStringCompositeHtmlAttr("aria-labelledby", separator = " ")
+
+  val onClicked: CompositeHtmlAttr =
+    customStringCompositeHtmlAttr("onclick", separator = " ")

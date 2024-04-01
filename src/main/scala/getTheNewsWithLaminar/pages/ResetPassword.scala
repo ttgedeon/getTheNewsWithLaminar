@@ -2,18 +2,11 @@ package getTheNewsWithLaminar.pages
 
 import com.raquo.laminar.api.L.{*, given}
 import org.scalajs.dom
-import org.scalajs.dom.MouseEvent
-import org.scalajs.dom.HTMLCollection
 import com.raquo.laminar.nodes.ReactiveHtmlElement
 import org.scalajs.dom.HTMLDivElement
 import getTheNewsWithLaminar.components.CustomHtmlAttrs.{ariaLabel, onClicked}
 
-object LoginPage:
-  def sana(event: MouseEvent, fa: dom.Element) =
-    val s = div(
-      form()
-    )
-
+object ResetPassword:
   def apply(): ReactiveHtmlElement[HTMLDivElement] =
     div( className:="row g-0",
       div(
@@ -49,11 +42,11 @@ object LoginPage:
             label(
               forId:="password", className:="form-label",
               span(className:="text-danger", "*"),
-              "Password"
+              "New Password"
             ),
             input(
               idAttr:="password", `type`:="password", className:="form-control",
-              placeholder :="Password", ariaLabel:="Password",
+              placeholder :="New Password", ariaLabel:="Password",
               required := true
             ),
             div(
@@ -61,12 +54,29 @@ object LoginPage:
               "Please enter your last name."
             )
           ),
+          div(
+            className:="col-12",
+            label(
+              forId:="confirmPassword", className:="form-label",
+              span(className:="text-danger",  "*"),
+              "Confirm password"
+            ),
+            input(
+              forId:="confirmPassword", `type`:="password", className:="form-control",
+              placeholder := "Confirm password", ariaLabel:="Confirm password",
+              required := true
+            ),
+            div(
+              className:="invalid-feedback",
+              "Please enter your password again."
+            )
+          ),
 
           div(
             className:="col-12",
             button(
               className:="btn btn-primary", `type`:="submit",
-              onClicked := "validate",
+              onClicked :="validate",
               "Submit form"
             )
           )

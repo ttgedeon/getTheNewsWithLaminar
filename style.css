@@ -1,0 +1,25 @@
+@media (max-width: 576px) {
+  .form-width {
+    width: 90%;
+  }
+}
+@media (min-width: 577px) {
+  .form-width {
+    width: 80%;
+  }
+}
+@media (min-width: 768px) {
+  .form-width {
+    width: 70%;
+  }
+}
+@media (min-width: 992px) {
+  .form-width {
+    width: 50%;
+  }
+}
+
+.newsLogo {
+    width: 100px;
+    height: 100px;
+}
