@@ -6,9 +6,12 @@ import com.raquo.laminar.nodes.ReactiveHtmlElement
 import org.scalajs.dom.HTMLDivElement
 import getTheNewsWithLaminar.components.NavBarSecond
 
-object NotFoundPage:
+
+import getTheNewsWithLaminar.components.CustomHtmlAttrs.{ariaLabel, onClicked}
+
+object DashboardPage:
   def apply(): ReactiveHtmlElement[HTMLDivElement] =
     div(
       NavBarSecond(),
-      "Page not found"
+      "Dashboard page"
     )

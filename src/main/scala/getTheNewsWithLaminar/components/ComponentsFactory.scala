@@ -34,14 +34,14 @@ object ComponentsFactory:
     button(
       `type` := buttonType, className := buttonClass, onClick --> {(_: MouseEvent) => import getTheNewsWithLaminar.XMain
         XMain.manga()},
-      child.text <-- Var(buttonContent).signal, idAttr := "buttonx"
+       buttonContent, idAttr := "buttonx"
     )
 
   def buttonInfo(buttonType: String, buttonClass: String, buttonContent: String): Element =
     button(
       `type` := buttonType, className := buttonClass,
       onClick --> {(_: MouseEvent) => ()},
-      child.text <-- Var(buttonContent).signal, idAttr := "button"
+      buttonContent, idAttr := "button"
     )
 
   def customStringCompositeHtmlAttr(name: String, separator: String) : CompositeHtmlAttr = {

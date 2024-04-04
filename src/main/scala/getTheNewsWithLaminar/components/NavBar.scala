@@ -14,7 +14,7 @@ object NavBar:
           ariaLabel := "Toggle navigation",
           span(className := "navbar-toggler-icon")
         ),
-        a(className := "navbar-brand", href := "#", child.text <-- Var("Navbar").signal),
+        a(className := "navbar-brand", href := "#", "Navbar"),
         div(className := "collapse navbar-collapse", idAttr := "navbarTogglerDemo03",
           ul(className := "navbar-nav me-auto mb-2 mb-lg-0",
             li(className := "nav-item",

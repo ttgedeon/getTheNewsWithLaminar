@@ -4,11 +4,8 @@ import com.raquo.laminar.api.L.{*, given}
 import org.scalajs.dom
 import com.raquo.laminar.nodes.ReactiveHtmlElement
 import org.scalajs.dom.HTMLDivElement
-import getTheNewsWithLaminar.components.NavBarSecond
+import getTheNewsWithLaminar.components.CustomHtmlAttrs.{ariaLabel, onClicked}
 
-object NotFoundPage:
+object LikedNewsPage:
   def apply(): ReactiveHtmlElement[HTMLDivElement] =
-    div(
-      NavBarSecond(),
-      "Page not found"
-    )
+    div("Liked News")

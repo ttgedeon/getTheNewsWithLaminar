@@ -4,14 +4,18 @@ import com.raquo.laminar.api.L.{*, given}
 import CustomHtmlAttrs.*
 
 object NavBarSecond:
-  def apply(elt1: Option[String], elt2: Option[String], elt3: Option[String],
-            elt4: Option[String], elt5: Option[String], elt6: Option[String],
-            elt7: Option[String], elt8: Option[String]): Element =
+  def apply(elt1: Option[String]=None, elt2: Option[String]=None, elt3: Option[String]=None,
+            elt4: Option[String]=None, elt5: Option[String]=None, elt6: Option[String]=None,
+            elt7: Option[String]=None, elt8: Option[String]=None): Element =
 
     navTag(className := "navbar navbar-expand-lg navbar-light bg-light",
       div(className := "container-fluid",
-        a(className := "navbar-brand", href := "#",
-          child.text <-- Var(elt1.getOrElse("Navbar scroll")).signal),
+        a(className := "navbar-brand", href := "/home",
+          img(
+            src :=
+              "https://i.pinimg.com/736x/0f/51/43/0f514348930957803d557f6f825aa36b.jpg",
+            className := "m-auto newsLogo")
+        ),
         button(className := "navbar-toggler", `type` := "button",
           dataBsToggle := "collapse", dataBsTarget := "#navbarScroll",
           ariaControls := "navbarScroll", ariaExpanded := "false",
@@ -21,48 +25,60 @@ object NavBarSecond:
         div(className := "collapse navbar-collapse", idAttr := "navbarScroll",
           ul(className := "navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll",
             styleAttr := "--bs-scroll-height: 100px;",
-            li(className := "nav-item",
-              a(className := "nav-link active", ariaCurrent := "page", href := "#",
-                child.text <-- Var(elt2.getOrElse("Home")).signal
-              ),
-            ),
-            li(className := "nav-item",
-              a( className := "nav-link", href := "#",
-                child.text <-- Var(elt3.getOrElse("Link")).signal)
-            ),
             li(className := "nav-item dropdown",
               a(className := "nav-link dropdown-toggle", href := "#",
                 idAttr := "navbarScrollingDropdown", role := "button",
                 dataBsToggle := "dropdown", ariaExpanded := "false",
-                child.text <-- Var(elt4.getOrElse("Link")).signal
+                "My news"
               ),
               ul(className := "dropdown-menu",
                 ariaLabelledBy := "navbarScrollingDropdown",
-                li(a(className := "dropdown-item", href := "#",
-                  child.text <-- Var(elt5.getOrElse("Action")).signal)
+                li(a(className := "dropdown-item", href := "/savedNews",
+                  "Saved news")
                 ),
-                li(a(className := "dropdown-item", href := "#",
-                  child.text <-- Var(elt6.getOrElse("Another action")).signal)
+                li(a(className := "dropdown-item", href := "/likedNews",
+                  "Liked news")
                 ),
-                li(hr(className := "dropdown-divider")
-                ),
-                li(a(className := "dropdown-item", href := "#",
-                  child.text <-- Var(elt7.getOrElse("Something else here")).signal)
-                )
+
               )
             ),
             li(className := "nav-item",
-              a(className := "nav-link disabled",
-                child.text <-- Var(elt7.getOrElse("Link")).signal)
-            )
-          ),
-          form(className := "d-flex",
-            input(className := "form-control me-2", `type` := "seach",
-              placeholder := "Search", ariaLabel := "Search"
+              a( className := "nav-link", href := "/history",
+                "History")
             ),
-            button(className := "btn btn-outline-success", `type` := "submit",
-              child.text <-- Var(elt8.getOrElse("Search")).signal
-            )
+          ),
+
+            div(className := "nav-item dropdown me-5",
+              a(className := "nav-link", href := "#",
+                idAttr := "navbarScrollingDropdown", role := "button",
+                dataBsToggle := "dropdown",
+                ariaExpanded := "false",
+                div(
+                  img(
+                    className:="userPicContainer",
+                    src :=
+                      "https://www.tenforums.com/geek/gars/images/2/types/thumb_15951118880user.png",
+                    className := "m-auto newsLogo")
+                )
+              ),
+              ul(className := "dropdown-menu",
+                ariaLabelledBy := "navbarScrollingDropdown",
+                li(a(className := "dropdown-item", href := "/dashboard",
+                  "Dashboard")
+                ),
+                li(a(className := "dropdown-item", href := "/settings",
+                  "Settings")
+                ),
+                li(a(className := "dropdown-item", href := "/profile",
+                  "Profile")
+                ),
+                li(hr(className := "dropdown-divider")
+                ),
+                li(a(className := "dropdown-item", href := "/logout",
+                  "Logout")
+                )
+              )
+//            )
           )
         )
       )

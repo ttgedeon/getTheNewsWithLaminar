@@ -4,10 +4,9 @@ import com.raquo.laminar.api.L.{*, given}
 import org.scalajs.dom
 import com.raquo.laminar.nodes.ReactiveHtmlElement
 import org.scalajs.dom.HTMLDivElement
-import getTheNewsWithLaminar.components.ComponentsFactory.*
-import getTheNewsWithLaminar.components.CustomHtmlAttrs.*
+import getTheNewsWithLaminar.components.CustomHtmlAttrs.{ariaLabel, onClicked}
 
-object SignupPage:
+object ResetPasswordPage:
   def apply(): ReactiveHtmlElement[HTMLDivElement] =
     div( className:="row g-0",
       div(
@@ -22,39 +21,7 @@ object SignupPage:
             src :=
               "https://i.pinimg.com/736x/0f/51/43/0f514348930957803d557f6f825aa36b.jpg",
             className := "m-auto newsLogo"),
-          div(
-            className:= "col-12",
-            label(
-              forId := "firstName", className := "form-label",
-              span(className:= "text-danger", "*"),
-              "First name"
-            ),
-            input(
-              idAttr := "firstName", `type`:= "text", className := "form-control",
-              placeholder := "First name", ariaLabel := "First name", required := true
-            ),
-            div(
-              className:= "invalid-feedback",
-              "Please enter your first name."
-            )
-          ),
 
-          div(
-            className:= "col-12",
-            label(
-              forId:="lastName", className:="form-label",
-              span(className:="text-danger", "*"),
-              "Last name"
-            ),
-            input(
-              idAttr:="lastName", `type`:="text", className:="form-control",
-              placeholder:="Last name", ariaLabel:="LastName",
-              required := true
-            ),
-            div(className:="invalid-feedback",
-              "Please enter your last name."
-            )
-          ),
           div(
             className:="col-12",
             label(
@@ -75,11 +42,11 @@ object SignupPage:
             label(
               forId:="password", className:="form-label",
               span(className:="text-danger", "*"),
-              "Password"
+              "New Password"
             ),
             input(
               idAttr:="password", `type`:="password", className:="form-control",
-              placeholder :="Password", ariaLabel:="Password",
+              placeholder :="New Password", ariaLabel:="Password",
               required := true
             ),
             div(
@@ -105,16 +72,6 @@ object SignupPage:
             )
           ),
 
-          div(
-            className:="col-12",
-            input(
-              `type`:= "file", className:="form-control", placeholder:="ProfilePage picture",
-              ariaLabel:="ProfilePage picture"
-            ),
-            div(className:="invalid-feedback",
-              "Please enter your profile picture"
-            )
-          ),
           div(
             className:="col-12",
             button(

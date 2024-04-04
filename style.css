@@ -12,6 +12,12 @@
   .form-width {
     width: 70%;
   }
+  .cardHeight {
+    height: 300px;
+  }
+  .cardImageHeight {
+    height: 100%;
+  }
 }
 @media (min-width: 992px) {
   .form-width {
@@ -22,4 +28,15 @@
 .newsLogo {
     width: 100px;
     height: 100px;
+}
+
+.userPicContainer {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%
+}
+
+.objectFit {
+    object-fit: cover;
+    object-position: center
 }

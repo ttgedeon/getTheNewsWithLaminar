@@ -3,9 +3,10 @@ package getTheNewsWithLaminar
 object YMain:
   def mental() =
     import getTheNewsWithLaminar.domain.apiDomain.NewsResponse
-    import getTheNewsWithLaminar.domain.storageDomain.User
+    import getTheNewsWithLaminar.domain.localDomain.User
     import getTheNewsWithLaminar.XMain.Comments
-    import getTheNewsWithLaminar.service.{ServiceError, UserService}
+    import getTheNewsWithLaminar.services.generics.ServiceError
+    import getTheNewsWithLaminar.services.localServices.UserService
     import sttp.client4.quick.*
     import sttp.client4.Response
     import upickle.default.*

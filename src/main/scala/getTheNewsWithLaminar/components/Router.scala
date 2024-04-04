@@ -13,10 +13,7 @@ object Router:
         div(
           cls := "container-fluid",
           (pathEnd | path("home")) {
-           div(
-             NavBar(),
-             HomePage()
-           )
+            HomePage()
           },
           path("login") {
             LoginPage()
@@ -28,7 +25,28 @@ object Router:
             ChangePasswordPage()
           },
           path("resetPassword") {
-            ResetPassword()
+            ResetPasswordPage()
+          },
+          path("savedNews") {
+            SavedNews()
+          },
+          path("likedNews") {
+            LikedNewsPage()
+          },
+          path("history") {
+            HistoryPage()
+          },
+          path("dashboard") {
+            DashboardPage()
+          },
+          path("settings") {
+            SettingsPage()
+          },
+          path("profile") {
+            ProfilePage()
+          },
+          path("logout"){
+            LogoutPage()
           },
           noneMatched {
             NotFoundPage()
