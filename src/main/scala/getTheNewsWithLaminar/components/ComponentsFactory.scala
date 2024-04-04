@@ -44,7 +44,8 @@ object ComponentsFactory:
       buttonContent, idAttr := "button"
     )
 
-  def customStringCompositeHtmlAttr(name: String, separator: String) : CompositeHtmlAttr = {
+  def customStringCompositeHtmlAttr(name: String, separator: String = "")
+  : CompositeHtmlAttr = {
     val attr = new HtmlAttr(name, StringAsIsCodec)
     new CompositeKey(
       name = attr.name,
