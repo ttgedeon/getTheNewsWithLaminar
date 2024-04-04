@@ -9,7 +9,8 @@ object MainArticleCard:
             imageRef: Option[String]=None, date: Option[String]=None,
             pictureAlt: Option[String]=None,
            smallCard: Boolean = false): Element =
-    
+
+//    def conditionalImage: Element = if imageRef.nonEmpty & !smallCard then
     def conditionalImage: Element = if imageRef.nonEmpty then
       div(className := "col-md-4 cardImageHeight",
       img(src := imageRef.getOrElse(remix),

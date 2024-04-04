@@ -31,3 +31,5 @@ def GetTheNews(): Unit =
 
 end GetTheNews
 
+object Main
+
