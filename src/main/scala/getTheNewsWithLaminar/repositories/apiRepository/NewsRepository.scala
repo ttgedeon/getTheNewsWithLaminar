@@ -14,8 +14,9 @@ object NewsRepository extends Repository[NewsResponse]:
   /**
    * main endpoint for the user repositories
    */
-  override val mainEndpoint: String = "https://newsapi" +
-    ".org/v2/everything?q=sports&q=politics&q=science&q=intelligence&apiKey" +
+  val pa: String = "apiKey"
+  override val mainEndpoint: String = s"https://newsapi" +
+    s".org/v2/everything?q=sports&q=politics&q=science&q=intelligence&$pa" +
     "=63b223ccd5ad44368c4acb95f7af2f96"
 
   /**
