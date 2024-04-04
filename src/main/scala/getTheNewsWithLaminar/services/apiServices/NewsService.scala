@@ -18,7 +18,8 @@ object NewsService extends Service[NewsResponse]:
      * @return `Future[ServiceError, Seq[Credentials]]`
      */
     override def list : Future[ServiceError | NewsResponse] =
-      repository.getAll
+      repository
+        .getAll
         .map {
           case error: RepositoryError => ServiceError(error.message)
           case values => values.asInstanceOf[NewsResponse]

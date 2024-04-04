@@ -26,7 +26,7 @@ object HomePage:
 
     def apiResponse(articleStream: Var[Seq[Element]] , small: Boolean = false): Future[Unit] =
       NewsService
-        .listResponse
+        .list
         .map{ (result: ServiceError | NewsResponse) =>
           result match
             case _ : ServiceError =>

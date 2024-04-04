@@ -38,7 +38,7 @@ trait Service[A <: {def id: String} | {def status: String}]:
 
   /**
    * Retrieve all the instances of entity Credentials
-   * @return `Future[ServiceError, Seq[Credentials]]`
+   * @return `Future[ServiceError, Seq[A]]`
    */
   def list : Future[ServiceError | Seq[A] | A] =
     repository.getAll
