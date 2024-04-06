@@ -16,34 +16,49 @@ import scala.concurrent.ExecutionContext.Implicits.global
 import scala.util.{Failure, Success}
 
 object HomePage:
+  /**
+   * Renders the home page
+   * @return `ReactiveHtmlElement[HTMLDivElement]`
+   */
   def apply(): ReactiveHtmlElement[HTMLDivElement] =
+    // user custom  full Article list signal source
     val fullArticleList: Var[Seq[Article]] = Var(Nil)
 
+    // random light article list signal source
     val smallArticleList: Var[Seq[Article]] = Var(Nil)
 
-    val fullArticlesSignal: StrictSignal[Seq[Article]] = fullArticleList.signal
-
-    val smallArticlesSignal: StrictSignal[Seq[Article]] = smallArticleList.signal
-
-    def apiResponse(articleStream: Var[Seq[Article]]): Future[Unit] =
+    /**
+     * call the newsAPI and provides articles to
+     * @param articleSignalSource article list signal source
+     * @return `Unit`
+     */
+    def articlesProvider(articleSignalSource: Var[Seq[Article]]): Future[Unit] =
       NewsService
         .list
         .map{ (result: ServiceError | NewsResponse) =>
           result match
             case _ : ServiceError =>
-              articleStream.update((x: Seq[Article]) => x)
+              articleSignalSource.update((x: Seq[Article]) => x)
               ()
             case result : NewsResponse =>
-              articleStream
+              articleSignalSource
                 .update((x: Seq[Article]) =>
                   x :++ result.articles.filterNot((_: Article).title == "[Removed]")
                 )
               ()
         }
 
-    apiResponse(articleStream = fullArticleList)
-    apiResponse(articleStream = smallArticleList)
+    // providing full articles signal source
+    articlesProvider(articleSignalSource = fullArticleList)
+    // providing light articles signal source
+    articlesProvider(articleSignalSource = smallArticleList)
 
+    /**
+     * Converts and articles signal into a signal of card rendered articles
+     * @param articlesSignal articles signal
+     * @param small rendering size
+     * @return `Signal[Seq[Element]]`
+     */
     def articlesDomElementsStream(articlesSignal: StrictSignal[Seq[Article]],
                                   small: Boolean=false): Signal[Seq[Element]] =
       articlesSignal
@@ -63,11 +78,11 @@ object HomePage:
           )
         ),
         div(className:="col-12 col-md-9",
-          children <-- articlesDomElementsStream(articlesSignal=fullArticlesSignal)
+          children <-- articlesDomElementsStream(articlesSignal=fullArticleList.signal)
         ),
         div(className:="col-12 col-md-3",
           children <-- articlesDomElementsStream(
-            articlesSignal=smallArticlesSignal, small=true)
+            articlesSignal=smallArticleList.signal, small=true)
         )
       )
     )
